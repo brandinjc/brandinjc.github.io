@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of a Music & Sound Recording student.">
+    <title>Your Name | Music & Sound Recording</title>
+
+    <style>
+        /* ============================================================
+           GLOBAL DESIGN VARIABLES
+           Change these values to quickly customize the entire site.
+           ============================================================ */
+        :root {
+            --background: #f7f7f5;
+            --surface: #ffffff;
+            --dark: #111315;
+            --dark-surface: #191c1f;
+            --text: #17191b;
+            --muted: #6b7075;
+            --light-text: #f4f5f5;
+            --accent: #c7a86b;
+            --accent-dark: #a88a50;
+            --border: #dedfdd;
+            --dark-border: #303438;
+            --max-width: 1180px;
+            --radius: 12px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        /* ============================================================
+           RESET
+           Removes inconsistent browser defaults.
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        /* ============================================================
+           REUSABLE CONTAINER
+           Keeps content centered and readable on large screens.
+           ============================================================ */
+        .container {
+            width: min(calc(100% - 40px), var(--max-width));
+            margin-inline: auto;
+        }
+
+        /* ============================================================
+           NAVIGATION
+           ============================================================ */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(247, 247, 245, 0.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            color: var(--muted);
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        /* ============================================================
+           HERO / HOME
+           ============================================================ */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            background: var(--background);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding-block: 100px;
+        }
+
+        .eyebrow {
+            margin-bottom: 18px;
+            color: var(--accent-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            font-size: clamp(2.8rem, 7vw, 6rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-dark);
+        }
+
+        .hero-description {
+            max-width: 650px;
+            color: var(--muted);
+            font-size: 1.15rem;
+            margin-bottom: 35px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        /* ============================================================
+           BUTTONS
+           ============================================================ */
+        .button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 48px;
+            padding: 0 22px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            background: var(--dark);
+            color: white;
+        }
+
+        .button-primary:hover {
+            background: #2b2f32;
+        }
+
+        .button-secondary {
+            border-color: var(--border);
+            color: var(--text);
+            background: transparent;
+        }
+
+        .button-secondary:hover {
+            background: white;
+        }
+
+        /* ============================================================
+           GENERAL SECTIONS
+           ============================================================ */
+        .section {
+            padding-block: 110px;
+        }
+
+        .section-dark {
+            background: var(--dark);
+            color: var(--light-text);
+        }
+
+        .section-accent {
+            background: #eee8da;
+        }
+
+        .section-heading {
+            max-width: 760px;
+            margin-bottom: 60px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 20px;
+        }
+
+        .section-heading > p:last-child {
+            color: var(--muted);
+            max-width: 650px;
+        }
+
+        .section-dark .section-heading > p:last-child {
+            color: #aeb3b7;
+        }
+
+        /* ============================================================
+           ABOUT
+           ============================================================ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.9fr) minmax(300px, 1.1fr);
+            gap: 70px;
+            align-items: center;
+        }
+
+        /* Replace this placeholder with your own image if desired. */
+        .image-placeholder {
+            min-height: 480px;
+            background: linear-gradient(135deg, #e5e2da, #cfcac0);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+
+        .about-text p {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        .quick-facts {
+            margin-top: 35px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--border);
+        }
+
+        .quick-facts div {
+            padding-top: 18px;
+            padding-right: 15px;
+        }
+
+        .quick-facts strong,
+        .quick-facts span {
+            display: block;
+        }
+
+        .quick-facts strong {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+
+        .quick-facts span {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* ============================================================
+           PROJECTS
+           ============================================================ */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #555b60;
+        }
+
+        .project-image {
+            aspect-ratio: 16 / 10;
+            background: linear-gradient(135deg, #292e32, #16191b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #73797d;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-number {
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .project-content h3 {
+            font-size: 1.45rem;
+            margin-bottom: 5px;
+        }
+
+        .project-category {
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 18px;
+        }
+
+        .project-content > p:not(.project-number):not(.project-category) {
+            color: #aeb3b7;
+            font-size: 0.9rem;
+            margin-bottom: 22px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 25px;
+        }
+
+        .project-tags span {
+            padding: 5px 9px;
+            border: 1px solid var(--dark-border);
+            border-radius: 4px;
+            color: #bfc3c6;
+            font-size: 0.7rem;
+        }
+
+        .project-link {
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           SKILLS
+           ============================================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .skill-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .skill-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #eee8da;
+            color: var(--accent-dark);
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .skill-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            color: var(--muted);
+            font-size: 0.85rem;
+            padding-block: 6px;
+            border-bottom: 1px solid #eeeeec;
+        }
+
+        .development-note {
+            margin-top: 30px;
+            padding: 20px 25px;
+            background: #eee8da;
+            border-radius: var(--radius);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .development-note span {
+            color: var(--muted);
+        }
+
+        /* ============================================================
+           CAREER GOALS
+           ============================================================ */
+        .goals-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 80px;
+        }
+
+        .goals-grid h2 {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .goals-text p {
+            margin-bottom: 20px;
+            color: #555a5e;
+        }
+
+        .interest-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 30px;
+        }
+
+        .interest-list span {
+            padding: 8px 12px;
+            border: 1px solid #c9c2b3;
+            border-radius: 5px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           DEVELOPMENT TIMELINE
+           ============================================================ */
+        .timeline {
+            border-left: 1px solid var(--border);
+            margin-left: 10px;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 35px;
+            padding: 0 0 50px 30px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: absolute;
+            left: -5px;
+            top: 7px;
+        }
+
+        .timeline-year {
+            color: var(--accent-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .timeline-item h3 {
+            margin-bottom: 8px;
+        }
+
+        .timeline-item p {
+            color: var(--muted);
+            max-width: 650px;
+        }
+
+        /* ============================================================
+           CONTACT
+           ============================================================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-grid h2 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1;
+            letter-spacing: -0.05em;
+            margin-bottom: 25px;
+        }
+
+        .contact-grid > div > p:not(.eyebrow) {
+            color: #aeb3b7;
+            max-width: 500px;
+        }
+
+        .contact-details {
+            margin-top: 40px;
+        }
+
+        .contact-details > div {
+            padding-block: 18px;
+            border-top: 1px solid var(--dark-border);
+        }
+
+        .contact-label {
+            display: block;
+            color: #747b80;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            margin-bottom: 5px;
+        }
+
+        .contact-details a {
+            color: white;
+        }
+
+        .contact-details a:hover {
+            color: var(--accent);
+        }
+
+        /* ============================================================
+           CONTACT FORM
+           ============================================================ */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #d7d9da;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            border: 1px solid var(--dark-border);
+            background: #151719;
+            color: white;
+            padding: 14px 15px;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #656b70;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer {
+            background: var(--dark);
+            color: #777d82;
+            border-top: 1px solid var(--dark-border);
+            padding-block: 25px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.75rem;
+        }
+
+        .footer a {
+            color: #aeb3b7;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        /* ============================================================
+           TABLET RESPONSIVE DESIGN
+           ============================================================ */
+        @media (max-width: 900px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-grid {
+                gap: 40px;
+            }
+
+            .goals-grid,
+            .contact-grid {
+                gap: 50px;
+            }
+        }
+
+        /* ============================================================
+           PHONE RESPONSIVE DESIGN
+           ============================================================ */
+        @media (max-width: 680px) {
+            .container {
+                width: min(calc(100% - 28px), var(--max-width));
+            }
+
+            .navbar {
+                min-height: 65px;
+                flex-direction: column;
+                justify-content: center;
+                gap: 8px;
+                padding-block: 10px;
+            }
+
+            .nav-links {
+                gap: 16px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                font-size: 0.75rem;
+            }
+
+            .hero {
+                min-height: auto;
+            }
+
+            .hero-content {
+                padding-block: 90px;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.6rem, 13vw, 4rem);
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding-block: 80px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-placeholder {
+                min-height: 350px;
+            }
+
+            .quick-facts {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding-top: 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .goals-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* ============================================================
+           ACCESSIBILITY
+           Respects visitors who prefer reduced motion.
+           ============================================================ */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+         NAVIGATION
+         The href="#section-name" links jump to sections below.
+         ============================================================ -->
+    <header class="site-header">
+        <nav class="navbar container">
+            <a href="#home" class="logo">YOUR NAME</a>
+
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#goals">Goals</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- ========================================================
+             HERO SECTION
+             The first thing visitors see.
+             ======================================================== -->
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <p class="eyebrow">MUSIC & SOUND RECORDING STUDENT</p>
+
+                <h1>
+                    Building my skills in
+                    <span>audio, recording & production.</span>
+                </h1>
+
+                <p class="hero-description">
+                    I'm a second-year college student exploring recording
+                    engineering, music production, sound technology, and
+                    the future of audio.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#projects" class="button button-primary">
+                        View My Work
+                    </a>
+
+                    <a href="#contact" class="button button-secondary">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             ABOUT SECTION
+             ======================================================== -->
+        <section id="about" class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">01 — ABOUT</p>
+                    <h2>Learning, creating, and finding my direction.</h2>
+                </div>
+
+                <div class="about-grid">
+
+                    <!-- Replace this placeholder with an <img> later. -->
+                    <div class="image-placeholder">
+                        <span>YOUR PHOTO</span>
+                    </div>
+
+                    <div class="about-text">
+                        <p>
+                            I'm a second-year Music & Sound Recording student
+                            developing my technical and creative skills in
+                            audio production, recording, and music technology.
+                        </p>
+
+                        <p>
+                            I'm especially interested in understanding how
+                            technical decisions can influence the character
+                            and emotion of a recording.
+                        </p>
+
+                        <p>
+                            My education is giving me opportunities to
+                            experiment, learn from projects, and discover
+                            which areas of the audio industry I want to
+                            pursue professionally.
+                        </p>
+
+                        <div class="quick-facts">
+                            <div>
+                                <strong>Education</strong>
+                                <span>Music & Sound Recording</span>
+                            </div>
+
+                            <div>
+                                <strong>Current Focus</strong>
+                                <span>Recording & Production</span>
+                            </div>
+
+                            <div>
+                                <strong>Exploring</strong>
+                                <span>AI & Audio Technology</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             PROJECTS SECTION
+             Add your real projects as your portfolio grows.
+             ======================================================== -->
+        <section id="projects" class="section section-dark">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">02 — SELECTED WORK</p>
+                    <h2>Projects that show how I'm developing.</h2>
+                    <p>
+                        A selection of academic and personal projects from
+                        my development as an audio professional.
+                    </p>
+                </div>
+
+                <div class="projects-grid">
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <span>PROJECT IMAGE</span>
+                        </div>
+
+                        <div class="project-content">
+                            <p class="project-number">01</p>
+                            <h3>Multitrack Recording</h3>
+                            <p class="project-category">
+                                Recording Techniques
+                            </p>
+
+                            <p>
+                                A recording project focused on microphone
+                                placement, gain staging, session organization,
+                                and capturing a balanced performance.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>Recording</span>
+                                <span>Microphones</span>
+                                <span>Editing</span>
+                            </div>
+
+                            <!-- Replace # with your project URL or audio. -->
+                            <a href="#" class="project-link">
+                                View Project →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <span>PROJECT IMAGE</span>
+                        </div>
+
+                        <div class="project-content">
+                            <p class="project-number">02</p>
+                            <h3>Mixing Project</h3>
+                            <p class="project-category">
+                                Audio Production
+                            </p>
+
+                            <p>
+                                An academic mixing project exploring balance,
+                                EQ, dynamics, effects, and critical listening.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>Mixing</span>
+                                <span>EQ</span>
+                                <span>Dynamics</span>
+                            </div>
+
+                            <a href="#" class="project-link">
+                                View Project →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <span>PROJECT IMAGE</span>
+                        </div>
+
+                        <div class="project-content">
+                            <p class="project-number">03</p>
+                            <h3>AI & Audio Technology</h3>
+                            <p class="project-category">
+                                Emerging Technology
+                            </p>
+
+                            <p>
+                                Exploring artificial intelligence, emerging
+                                creative technologies, and their potential
+                                relationship with music and audio production.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>AI</span>
+                                <span>Technology</span>
+                                <span>Research</span>
+                            </div>
+
+                            <a href="#" class="project-link">
+                                View Project →
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             SKILLS SECTION
+             ======================================================== -->
+        <section id="skills" class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">03 — SKILLS</p>
+                    <h2>Technical skills I'm developing.</h2>
+                </div>
+
+                <div class="skills-grid">
+
+                    <div class="skill-card">
+                        <div class="skill-icon">01</div>
+                        <h3>Audio Production</h3>
+                        <ul>
+                            <li>Recording</li>
+                            <li>Editing</li>
+                            <li>Mixing</li>
+                            <li>Microphone techniques</li>
+                            <li>Gain staging</li>
+                            <li>Critical listening</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">02</div>
+                        <h3>Software</h3>
+                        <ul>
+                            <li>Pro Tools</li>
+                            <li>Logic Pro</li>
+                            <li>DAW workflows</li>
+                            <li>Digital audio editing</li>
+                            <li>Plugins & effects</li>
+                            <li>MIDI fundamentals</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">03</div>
+                        <h3>Technology</h3>
+                        <ul>
+                            <li>Digital audio</li>
+                            <li>Signal flow</li>
+                            <li>Audio interfaces</li>
+                            <li>Recording equipment</li>
+                            <li>Music technology</li>
+                            <li>Studio workflows</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">04</div>
+                        <h3>AI & Emerging Tech</h3>
+                        <ul>
+                            <li>AI fundamentals</li>
+                            <li>Creative AI workflows</li>
+                            <li>Technology research</li>
+                            <li>AI limitations & ethics</li>
+                            <li>Emerging audio tools</li>
+                            <li>Digital innovation</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="development-note">
+                    <strong>Currently developing:</strong>
+                    <span>
+                        Recording engineering · Mixing · Production ·
+                        Audio technology · AI applications
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             CAREER GOALS
+             ======================================================== -->
+        <section id="goals" class="section section-accent">
+            <div class="container goals-grid">
+
+                <div>
+                    <p class="eyebrow">04 — DIRECTION</p>
+                    <h2>Exploring where audio can take me.</h2>
+                </div>
+
+                <div class="goals-text">
+                    <p>
+                        I'm currently exploring different paths within the
+                        recording industry, with particular interest in
+                        recording, production, mixing, and emerging audio
+                        technology.
+                    </p>
+
+                    <p>
+                        My goal is to continue developing my technical
+                        foundation through coursework, hands-on projects,
+                        internships, and collaboration while building a
+                        portfolio that reflects both creativity and
+                        technical understanding.
+                    </p>
+
+                    <div class="interest-list">
+                        <span>Recording Engineering</span>
+                        <span>Music Production</span>
+                        <span>Mixing</span>
+                        <span>Sound Technology</span>
+                        <span>Studio Work</span>
+                        <span>Graduate Study</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================================
+             DEVELOPMENT TIMELINE
+             ======================================================== -->
+        <section class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="eyebrow">05 — MY DEVELOPMENT</p>
+                    <h2>Building the foundation for a career in audio.</h2>
+                </div>
+
+                <div class="timeline">
+
+                    <div class="timeline-item">
+                        <span class="timeline-year">YEAR 01</span>
+                        <div>
+                            <h3>Foundation</h3>
+                            <p>
+                                Built foundational knowledge in music,
+                                recording, audio technology, and production.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-year">YEAR 02</span>
+                        <div>
+                            <h3>Exploration</h3>
+                            <p>
+                                Developing recording and production skills
+                                while exploring AI, emerging technology,
+                                and potential career paths.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="timeline-year">NEXT</span>
+                        <div>
+                            <h3>Specialization</h3>
+                            <p>
+                                Seeking opportunities to gain professional
+                                experience, strengthen technical skills,
+                                and identify areas for further study.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             CONTACT
+             ======================================================== -->
+        <section id="contact" class="section section-dark">
+            <div class="container contact-grid">
+
+                <div>
+                    <p class="eyebrow">06 — CONTACT</p>
+                    <h2>Let's connect.</h2>
+
+                    <p>
+                        I'm interested in connecting with audio professionals,
+                        educators, students, and potential collaborators.
+                    </p>
+
+                    <div class="contact-details">
+
+                        <div>
+                            <span class="contact-label">EMAIL</span>
+                            <!-- Replace this email with yours. -->
+                            <a href="mailto:your.email@example.com">
+                                your.email@example.com
+                            </a>
+                        </div>
+
+                        <div>
+                            <span class="contact-label">LINKEDIN</span>
+                            <!-- Replace # with your LinkedIn URL. -->
+                            <a href="#" target="_blank" rel="noopener">
+                                LinkedIn Profile
+                            </a>
+                        </div>
+
+                        <div>
+                            <span class="contact-label">LOCATION</span>
+                            <span>Connecticut, USA</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--
+                    NOTE:
+                    This form is visually complete, but a static GitHub
+                    Pages site cannot process form submissions by itself.
+                    Connect it to a form service before publishing if you
+                    want visitors to submit messages.
+                -->
+                <form class="contact-form" action="#" method="POST">
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Your name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="6"
+                            placeholder="Your message..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="button button-primary">
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>© 2026 Your Name. All rights reserved.</p>
+            <a href="#home">Back to top ↑</a>
+        </div>
+    </footer>
+
+</body>
+</html>
